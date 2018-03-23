@@ -28,10 +28,11 @@
 			{% if user.is_authenticated %}
 				<div>
 					<a>{{ user.username }}</a>
+					<a class="btn btn-default" href="#">Upload</a>
 					<a class="btn btn-primary" href="/logout/">Logout</a>
 				</div>
     		{% else %}
-				<a class="btn btn-primary" href="/login/">Login</a>
+				<a class="btn btn-info" href="/login/">Login</a>
 			{% endif %}
 
 		</div>
