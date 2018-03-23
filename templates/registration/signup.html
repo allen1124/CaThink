@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="CaThink">
+
+	<title>ImageX - Share Your World</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="{% static 'bootstrap/css/bootstrap.css'%}" rel="stylesheet">
+
+	<!-- Custom fonts for this template -->
+	<link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+	<!-- Custom styles for this template -->
+	<link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
+</head>
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-light bg-light static-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">ImageX</a>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h2>Login</h2>
+		{% block content %}
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="btn btn-primary" type="submit">Login</button>
+			</form>
+{#			<a href="{% url 'register' %}"><button class="btn btn-light">Register</button></a>#}
+		{% endblock %}
+		<a href="{% url 'register' %}"><button class="btn btn-light">Register</button></a>
+	</div>
+</body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+</head>
+<body>
+// to - do
+</body>
+</html>
