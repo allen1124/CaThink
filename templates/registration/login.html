@@ -32,16 +32,63 @@
 		</div>
 	</nav>
 
-	<div class="container">
-		<h2>Login</h2>
-		{% block content %}
-			<form method="post">
-				{% csrf_token %}
-				{{ form.as_p }}
-				<button class="btn btn-primary" type="submit">Login</button>
-			</form>
-{#			<a href="{% url 'register' %}"><button class="btn btn-light">Register</button></a>#}
-		{% endblock %}
-		<a href="{% url 'register' %}"><button class="btn btn-light">Register</button></a>
+	<div style="display: table; height: 100vh; width: 100%; text-align: center;">
+		<div class="container" style="display: table-cell; vertical-align: middle; horiz-align: center;">
+			<h2>Login</h2>
+			{% block content %}
+				<form method="post">
+					{% csrf_token %}
+					{{ form.as_p }}
+					<button class="btn btn-primary" type="submit">Login</button>
+				</form>
+			{% endblock %}
+			<a href="{% url 'register' %}"><button class="btn btn-light">Register</button></a>
+		</div>
 	</div>
+	<!-- Footer -->
+    <footer class="footer bg-light">
+		<div class="container">
+        <div class="row">
+			<div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+				<ul class="list-inline mb-2">
+              		<li class="list-inline-item">
+                		<a href="#">About</a>
+              		</li>
+              		<li class="list-inline-item">&sdot;</li>
+              		<li class="list-inline-item">
+                		<a href="#">Contact</a>
+              		</li>
+              		<li class="list-inline-item">&sdot;</li>
+              		<li class="list-inline-item">
+                		<a href="#">Terms of Use</a>
+              		</li>
+              		<li class="list-inline-item">&sdot;</li>
+              		<li class="list-inline-item">
+                		<a href="#">Privacy Policy</a>
+					</li>
+				</ul>
+            	<p class="text-muted small mb-4 mb-lg-0">&copy; ImageX 2018. All Rights Reserved.</p>
+          	</div>
+          	<div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+            	<ul class="list-inline mb-0">
+              		<li class="list-inline-item mr-3">
+                		<a href="#">
+                  			<i class="fa fa-facebook fa-2x fa-fw"></i>
+                		</a>
+              		</li>
+              		<li class="list-inline-item mr-3">
+                		<a href="#">
+                  			<i class="fa fa-twitter fa-2x fa-fw"></i>
+               			</a>
+					</li>
+              		<li class="list-inline-item">
+                		<a href="#">
+                  			<i class="fa fa-instagram fa-2x fa-fw"></i>
+                		</a>
+              		</li>
+				</ul>
+          	</div>
+        	</div>
+      	</div>
+	</footer>
 </body>

@@ -25,23 +25,25 @@
 	<link rel="icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
-	<!-- Navigation -->
 	<nav class="navbar navbar-light bg-light static-top">
 		<div class="container">
 			<a class="navbar-brand" href="#">ImageX</a>
+			{% if user.is_authenticated %}
+				<div>
+					<a>{{ user.username }}</a>
+					<a class="btn btn-default" href="#">Upload</a>
+					<a class="btn btn-primary" href="/logout/">Logout</a>
+				</div>
+			{% else %}
+				<a class="btn btn-primary" href="/login/">Login</a>
+			{% endif %}
 		</div>
 	</nav>
+	{% block content%}
+	{% endblock %}
 
-	<div class="container">
-		<h2>Register</h2>
-		<form method="post">
-			{% csrf_token %}
-    		{{ form.as_p }}
-    		<button class="btn btn-primary"type="submit">Register</button>
-		</form>
-	</div>
-
-	<footer class="footer bg-light">
+	<!-- Footer -->
+    <footer class="footer bg-light">
 		<div class="container">
         <div class="row">
 			<div class="col-lg-6 h-100 text-center text-lg-left my-auto">
@@ -86,4 +88,9 @@
         	</div>
       	</div>
 	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="{% static 'jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}></script>
 </body>
+</html>
