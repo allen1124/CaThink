@@ -9,8 +9,8 @@ from django.urls import reverse
 class Image(models.Model):
 
 	title = models.CharField(max_length=120)
-	image = models.ImageField(null=True, blank=True)
-	description = models.TextField()
+	image = models.ImageField(null=True, blank=False)
+	description = models.TextField(blank=True)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
