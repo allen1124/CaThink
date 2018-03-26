@@ -7,6 +7,7 @@ class ImageForm(forms.ModelForm):
 		model = Image
 		fields = [
 			"title",
+			"tag",
 			"description",
 			"image",
 		]
