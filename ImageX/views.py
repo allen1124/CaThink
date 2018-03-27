@@ -1,22 +1,14 @@
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.db.models import Q
 from django.contrib.auth.forms import UserCreationForm
-from images.models import Image
 
 
 
 def index(request):
-    query = request.GET.get("q")
-    if query:
-        querysetList = Image.objects.all()
-        querysetList = querysetList.filter(Q(tag__contains=query))
-        context = {
-            "imagesList": querysetList,
-        }
-        return render(request, "images.html", context)
-    return render(request, 'index.html')
+	return render(request, 'index.html')
+
+
 
 def login(request):
 

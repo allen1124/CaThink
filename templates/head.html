@@ -28,15 +28,16 @@
 	<nav class="navbar navbar-light bg-light static-top">
 		<div class="container">
 			<a class="navbar-brand" href="/">ImageX</a>
+			<div>
+			<a class="btn btn-default" href="/images/">Images</a>
 			{% if user.is_authenticated %}
-				<div>
-					<a>{{ user.username }}</a>
 					<a class="btn btn-default" href="/images/create">Upload</a>
-					<a class="btn btn-primary" href="/logout/">Logout</a>
-				</div>
+					<a class="btn btn-default" href="/logout/">Logout</a>
+					<a class="btn btn-default" href="#">{{ user.username }}</a>
 			{% else %}
 				<a class="btn btn-primary" href="/login/">Login</a>
 			{% endif %}
+			</div>
 		</div>
 	</nav>
 	{% block content%}
