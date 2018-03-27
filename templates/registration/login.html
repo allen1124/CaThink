@@ -19,7 +19,7 @@
 
 	<!-- Custom styles for this template -->
 	<link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
-
+	<link href="{% static 'css/login.css' %}" rel="stylesheet">
 	<!-- Custom icon -->
 	<link rel="shortcut icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
 	<link rel="icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
@@ -32,20 +32,26 @@
 		</div>
 	</nav>
 
-	<div style="display: table; height: 100vh; width: 100%; text-align: center;">
-		<div class="container" style="display: table-cell; vertical-align: middle; horiz-align: center;">
-			<h2>Login</h2>
-			{% block content %}
-				<form method="post">
-					{% csrf_token %}
-					{{ form.as_p }}
-					<button class="btn btn-primary" type="submit">Login</button>
-				</form>
-			{% endblock %}
-			<br>
-			<a href="{% url 'register' %}"><button class="btn btn-light">Register</button></a>
-		</div>
+	<div class="loginPage">
+
+        <div class="container" style="display: table-cell; vertical-align: middle; horiz-align: center;">
+            <div class="main-login main-center">
+                <h2>Login</h2>
+                {% block content %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </form>
+                {% endblock %}
+                <br>
+                <a href="{% url 'register' %}">
+                    <button class="btn btn-light">Register</button>
+                </a>
+            </div>
+        </div>
 	</div>
+
 	<!-- Footer -->
     <footer class="footer bg-light">
 		<div class="container">
