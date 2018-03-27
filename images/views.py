@@ -24,7 +24,7 @@ def image_create(request):
 		image = form.save(commit=False)
 		image.username = request.user.username
 		image.save()
-
+		return redirect('images')
 	context = {
 		"form": form
 	}
