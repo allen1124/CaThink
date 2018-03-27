@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from ImageX.views import index, register
@@ -29,8 +29,10 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout'),
 	url(r'^register/', register, name='register'),
 	url(r'^images/$', images_view.image_home, name='images'),
-	url(r'^images/create/$', images_view.image_create)
-
+	url(r'^images/create/$', images_view.image_create),
+	url(r'^images/detail/$', images_view.image_detail),
+	url(r'^images/update/$', images_view.image_update),
+	url(r'^images/delete/$', images_view.image_delete)
 ]
 
 if settings.DEBUG:

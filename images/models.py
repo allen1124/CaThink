@@ -8,10 +8,14 @@ from django.contrib.auth.models import User
 
 
 class Image(models.Model):
+
 	title = models.CharField(max_length=120)
 	username = models.CharField(max_length=120, null=False, blank=False)
 	tag = models.CharField(max_length=120, null=True, blank=True)
-	image = models.ImageField( null=True, blank=False)
+	category = models.CharField(max_length=120, null=True, blank=False)
+	image = models.ImageField(null=True, blank=False, height_field="heightField", width_field="WidthField")
+	heightField = models.IntegerField(default=0)
+	WidthField = models.IntegerField(default=0)
 	description = models.TextField(blank=True)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
