@@ -1,8 +1,8 @@
 {% extends 'head.html' %}
 
 {% block content %}
-	<h1>Upload Image</h1>
-	<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+	<h1 class="ml-4 mb-4">Upload Image</h1>
+	<form class="ml-4 mb-4" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
 		{{ form.as_p }}
 		<input class="btn btn-primary" type="submit" value="Upload Image"/>
 	</form>

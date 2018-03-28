@@ -13,6 +13,7 @@ class Image(models.Model):
 	username = models.CharField(max_length=120, null=False, blank=False)
 	tag = models.CharField(max_length=120, null=True, blank=True)
 	category = models.CharField(max_length=120, null=True, blank=False)
+	# category-option
 	image = models.ImageField(null=True, blank=False, height_field="heightField", width_field="WidthField")
 	heightField = models.IntegerField(default=0)
 	WidthField = models.IntegerField(default=0)
