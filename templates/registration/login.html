@@ -1,101 +1,126 @@
-{% load static %}
+{% load static widget_tweaks%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="CaThink">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="CaThink">
 
-	<title>ImageX - Share Your World</title>
+    <title>ImageX - Share Your World</title>
 
-	<!-- Bootstrap core CSS -->
-	<link href="{% static 'bootstrap/css/bootstrap.css'%}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.css'%}" rel="stylesheet">
 
-	<!-- Custom fonts for this template -->
-	<link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-	<link href="{% static 'simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-	<!-- Custom styles for this template -->
-	<link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
-	<link href="{% static 'css/login.css' %}" rel="stylesheet">
-	<!-- Custom icon -->
-	<link rel="shortcut icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
-	<link rel="icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <!-- Custom icon -->
+    <link rel="shortcut icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
-	<!-- Navigation -->
-	<nav class="navbar navbar-light bg-light static-top">
-		<div class="container">
-			<a class="navbar-brand" href="/">ImageX</a>
-		</div>
-	</nav>
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top position-fixed w-100">
+        <div class="container">
+            <a class="navbar-brand" href="/">ImageX</a>
+        </div>
+    </nav>
 
-	<div class="loginPage">
+    <div class="loginPage">
+        <div class="loginContainer">
 
-        <div class="container" style="display: table-cell; vertical-align: middle; horiz-align: center;">
-            <div class="main-login main-center">
-                <h2>Login</h2>
+            <div class="main-login main-center ">
+                <h3>Login</h3>
+                ---------------------------------------------
+                <br><br>
                 {% block content %}
                     <form method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <button class="btn btn-primary" type="submit">Login</button>
+{#                        {{ form.as_p }}#}
+
+                        {{ form.non_field_errors }}
+
+                        <div class="fieldWrapper form-group row1">
+                            {{ form.username.errors }}
+                            <label for="{{ form.username.id_for_label }}"> Username</label>
+
+                          {% render_field form.username class="form-control" %}
+
+                        </div>
+
+                        <div class="fieldWrapper form-group row1">
+                            {{ form.password.errors }}
+                            <label for="{{ form.password.id_for_label }}" > Password</label>
+                            {% render_field form.password class="form-control" %}
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-danger" type="submit">Sign in</button>
+                        </div>
+
                     </form>
+                    <br>
+                    Not a member? &nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'register' %}">
+                        Join imageX
+                    </a>
                 {% endblock %}
-                <br>
-                <a href="{% url 'register' %}">
-                    <button class="btn btn-light">Register</button>
-                </a>
+
+
             </div>
         </div>
-	</div>
+    </div>
 
-	<!-- Footer -->
-    <footer class="footer bg-light">
-		<div class="container">
+    <!-- Footer -->
+    <footer class="footer bg-light position-relative">
+        <div class="container">
         <div class="row">
-			<div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-				<ul class="list-inline mb-2">
-              		<li class="list-inline-item">
-                		<a href="#">About</a>
-              		</li>
-              		<li class="list-inline-item">&sdot;</li>
-              		<li class="list-inline-item">
-                		<a href="#">Contact</a>
-              		</li>
-              		<li class="list-inline-item">&sdot;</li>
-              		<li class="list-inline-item">
-                		<a href="#">Terms of Use</a>
-              		</li>
-              		<li class="list-inline-item">&sdot;</li>
-              		<li class="list-inline-item">
-                		<a href="#">Privacy Policy</a>
-					</li>
-				</ul>
-            	<p class="text-muted small mb-4 mb-lg-0">&copy; ImageX 2018. All Rights Reserved.</p>
-          	</div>
-          	<div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-            	<ul class="list-inline mb-0">
-              		<li class="list-inline-item mr-3">
-                		<a href="#">
-                  			<i class="fa fa-facebook fa-2x fa-fw"></i>
-                		</a>
-              		</li>
-              		<li class="list-inline-item mr-3">
-                		<a href="#">
-                  			<i class="fa fa-twitter fa-2x fa-fw"></i>
-               			</a>
-					</li>
-              		<li class="list-inline-item">
-                		<a href="#">
-                  			<i class="fa fa-instagram fa-2x fa-fw"></i>
-                		</a>
-              		</li>
-				</ul>
-          	</div>
-        	</div>
-      	</div>
-	</footer>
+            <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item">
+                        <a href="#">About</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="#">Contact</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="#">Terms of Use</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="#">Privacy Policy</a>
+                    </li>
+                </ul>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; ImageX 2018. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item mr-3">
+                        <a href="#">
+                            <i class="fa fa-facebook fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item mr-3">
+                        <a href="#">
+                            <i class="fa fa-twitter fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-instagram fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </footer>
 </body>
