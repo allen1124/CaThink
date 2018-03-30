@@ -43,18 +43,12 @@
                 {% block content %}
                     <form method="post">
                         {% csrf_token %}
-{#                        {{ form.as_p }}#}
-
                         {{ form.non_field_errors }}
-
                         <div class="fieldWrapper form-group row1">
                             {{ form.username.errors }}
                             <label for="{{ form.username.id_for_label }}"> Username</label>
-
-                          {% render_field form.username class="form-control" %}
-
+							{% render_field form.username class="form-control" %}
                         </div>
-
                         <div class="fieldWrapper form-group row1">
                             {{ form.password.errors }}
                             <label for="{{ form.password.id_for_label }}" > Password</label>
@@ -63,7 +57,6 @@
                         <div class="text-center">
                             <button class="btn btn-primary" type="submit">Sign in</button>
                         </div>
-
                     </form>
                     <br>
                     Not a member? &nbsp;&nbsp;&nbsp;
@@ -71,8 +64,6 @@
                         Join imageX
                     </a>
                 {% endblock %}
-
-
             </div>
         </div>
     </div>

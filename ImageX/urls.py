@@ -28,11 +28,11 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
 	url(r'^register/', register, name='register'),
-	url(r'^images/$', images_view.image_home, name='images'),
-	url(r'^images/create/$', images_view.image_create),
-	url(r'^images/detail/$', images_view.image_detail),
-	url(r'^images/update/$', images_view.image_update),
-	url(r'^images/delete/$', images_view.image_delete)
+	url(r'^images/$', images_view.imageHome, name='images'),
+	url(r'^images/create/$', images_view.imageUpload),
+	url(r'^images/detail/$', images_view.imageDetail),
+	url(r'^images/update/$', images_view.imageEdit),
+	url(r'^images/delete/$', images_view.imageDelete)
 ]
 
 if settings.DEBUG:

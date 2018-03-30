@@ -8,12 +8,29 @@ from django.contrib.auth.models import User
 
 
 class Image(models.Model):
-
+	CategoryList = (('Abstract', 'Abstract'),
+					('Aerial', 'Aerial'),
+					('Animals', 'Animals'),
+					('Architecture', 'Architecture'),
+					('Black and White', 'Black and White'),
+					('Family', 'Family'),
+					('Fashion', 'Fashion'),
+					('Fine Art', 'Fine Art'),
+					('Food', 'Food'),
+					('Journalism', 'Journalism'),
+					('Landscape', 'Landscape'),
+					('Macro', 'Macro'),
+					('Nature', 'Nature'),
+					('Night', 'Night'),
+					('People', 'People'),
+					('Performing Arts', 'Performing Arts'),
+					('Sport', 'Sport'),
+					('Still Life', 'Still Life'),
+					('Street, and Travel', 'Street, and Travel'))
 	title = models.CharField(max_length=120)
 	username = models.CharField(max_length=120, null=False, blank=False)
 	tag = models.CharField(max_length=120, null=True, blank=True)
-	category = models.CharField(max_length=120, null=True, blank=False)
-	# category-option
+	category = models.CharField(max_length=120, choices=CategoryList, null=True, blank=True)
 	image = models.ImageField(null=True, blank=False, height_field="heightField", width_field="WidthField")
 	heightField = models.IntegerField(default=0)
 	WidthField = models.IntegerField(default=0)
