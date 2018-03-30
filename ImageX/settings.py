@@ -130,3 +130,10 @@ LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Email Config
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'imagex.cathink@gmail.com'
+EMAIL_HOST_PASSWORD = 'cathink123'
+EMAIL_PORT = 587

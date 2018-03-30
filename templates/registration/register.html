@@ -36,35 +36,47 @@
 		<h2>Register</h2>
 		<form method="post">
 			{% csrf_token %}
-    		{{ form.as_p }}
+			{{ form.as_p }}
+{#    		{% for field in form %}#}
+{#				<p>#}
+{#					{{ field.label_tag }}<br>#}
+{#					{{ field }}#}
+{#					{% if field.help_text %}#}
+{#						<small style="display: none">{{ field.help_text }}</small>#}
+{#					{% endif %}#}
+{#					{% for error in field.errors %}#}
+{#						<p style="color: red">{{ error }}</p>#}
+{#					{% endfor %}#}
+{#			  	</p>#}
+{#				{% endfor %}#}
     		<button class="btn btn-primary"type="submit">Register</button>
 		</form>
 	</div>
 
 	<footer class="footer bg-light">
 		<div class="container">
-        <div class="row">
-			<div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-				<ul class="list-inline mb-2">
-              		<li class="list-inline-item">
-                		<a href="#">About</a>
-              		</li>
-              		<li class="list-inline-item">&sdot;</li>
-              		<li class="list-inline-item">
-                		<a href="#">Contact</a>
-              		</li>
-              		<li class="list-inline-item">&sdot;</li>
-              		<li class="list-inline-item">
-                		<a href="#">Terms of Use</a>
-              		</li>
-              		<li class="list-inline-item">&sdot;</li>
-              		<li class="list-inline-item">
-                		<a href="#">Privacy Policy</a>
-					</li>
-				</ul>
-            	<p class="text-muted small mb-4 mb-lg-0">&copy; ImageX 2018. All Rights Reserved.</p>
-          	</div>
-          	<div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+        	<div class="row">
+				<div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item">
+							<a href="#">About</a>
+						</li>
+						<li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item">
+							<a href="#">Contact</a>
+						</li>
+						<li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item">
+							<a href="#">Terms of Use</a>
+						</li>
+						<li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item">
+							<a href="#">Privacy Policy</a>
+						</li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; ImageX 2018. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-right my-auto">
             	<ul class="list-inline mb-0">
               		<li class="list-inline-item mr-3">
                 		<a href="#">
