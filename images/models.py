@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -27,8 +26,8 @@ class Image(models.Model):
 					('Sport', 'Sport'),
 					('Still Life', 'Still Life'),
 					('Street, and Travel', 'Street, and Travel'))
+	user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
 	title = models.CharField(max_length=120)
-	username = models.CharField(max_length=120, null=False, blank=False)
 	tag = models.CharField(max_length=120, null=True, blank=True)
 	category = models.CharField(max_length=120, choices=CategoryList, null=True, blank=True)
 	image = models.ImageField(null=True, blank=False, height_field="heightField", width_field="WidthField")

@@ -1,0 +1,50 @@
+{% extends "head.html" %}
+
+{% block content %}
+	<div class="container">
+		{% if messages %}
+		<ul class="messages">
+    		{% for message in messages %}
+    			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    		{% endfor %}
+		</ul>
+		{% endif %}
+		<h1>{{ user.username }} Profile</h1>
+		<hr>
+		<div class="row">
+			<div class="col-md-3">
+				{% if profile.avatar %}
+        		<div class="text-center">
+          			<img src="{{ profile.avatar.url }}" class="img-responsive" alt="Cinque Terre" width="200" height="200">
+        		</div>
+				{% endif %}
+      		</div>
+			<div class=" col-md-9 col-lg-9 ">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>First name:</td>
+							<td>{{ user_.first_name }}</td>
+                      	</tr>
+						<tr>
+							<td>Last name:</td>
+							<td>{{ user_.last_name }}</td>
+                      	</tr>
+						<tr>
+							<td>Biography:</td>
+							<td>{{ profile.bio }}</td>
+                      	</tr>
+						<tr>
+							<td>Location:</td>
+							<td>{{ profile.location }}</td>
+                      	</tr>
+					</tbody>
+				</table>
+			</div>
+			{% if user.id is user_.id %}
+				<a class="btn btn-primary" href="/profile/edit">Edit</a>
+				<a class="btn btn-primary" href="/">Change Password</a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.ImageField(upload_to='avatars', blank=True)
+	avatar = models.ImageField(upload_to="avatars", null=True, blank=True)
 	bio = models.TextField(max_length=500, default='', blank=True)
 	location = models.CharField(max_length=100, default='', blank=True)
 	no_of_images = models.IntegerField(default=0, blank=True)

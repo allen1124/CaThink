@@ -37,7 +37,8 @@ urlpatterns = [
 	url(r'^images/detail/$', images_view.image_detail),
 	url(r'^images/update/$', images_view.image_edit),
 	url(r'^images/delete/$', images_view.image_delete),
-	url(r'^members/profile/$', members_view.edit_profile)
+	url(r'^profile/edit$', members_view.profile_edit),
+	url(r'^profile/detail/(?P<id>\d+)/$', members_view.profile_detail, name="profile_detail")
 ]
 
 if settings.DEBUG:
