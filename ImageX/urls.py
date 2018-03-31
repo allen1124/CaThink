@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from ImageX.views import index, register
 from images import views as images_view
+from members import views as members_view
 from . import views
 
 urlpatterns = [
@@ -30,12 +31,13 @@ urlpatterns = [
 	url(r'^logout/$', auth_views.logout, name='logout'),
 	url(r'^register/', register, name='register'),
 	url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        views.activate, name='activate'),
+		views.activate, name='activate'),
 	url(r'^images/$', images_view.image_home, name='images'),
 	url(r'^images/create/$', images_view.image_upload),
 	url(r'^images/detail/$', images_view.image_detail),
 	url(r'^images/update/$', images_view.image_edit),
-	url(r'^images/delete/$', images_view.image_delete)
+	url(r'^images/delete/$', images_view.image_delete),
+	url(r'^members/profile/$', members_view.edit_profile)
 ]
 
 if settings.DEBUG:
