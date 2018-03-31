@@ -31,11 +31,11 @@ urlpatterns = [
 	url(r'^register/', register, name='register'),
 	url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate'),
-	url(r'^images/$', images_view.imageHome, name='images'),
-	url(r'^images/create/$', images_view.imageUpload),
-	url(r'^images/detail/$', images_view.imageDetail),
-	url(r'^images/update/$', images_view.imageEdit),
-	url(r'^images/delete/$', images_view.imageDelete)
+	url(r'^images/$', images_view.image_home, name='images'),
+	url(r'^images/create/$', images_view.image_upload),
+	url(r'^images/detail/$', images_view.image_detail),
+	url(r'^images/update/$', images_view.image_edit),
+	url(r'^images/delete/$', images_view.image_delete)
 ]
 
 if settings.DEBUG:

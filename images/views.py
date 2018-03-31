@@ -5,20 +5,22 @@ from .forms import ImageForm
 from .models import Image
 
 
-def imageHome(request):
-	querysetList = Image.objects.all()
+def image_home(request):
+	queryset_list = Image.objects.all()
 	query = request.GET.get("q")
 	if query:
-		querysetList = querysetList.filter(Q(tag=query))
+		queryset_list = queryset_list.filter(Q(tag=query))
 	context = {
-		"imagesList": querysetList,
+		"imagesList": queryset_list,
 	}
 	return render(request, "images.html", context)
 
-def imageDetail(request):
+
+def image_detail(request):
 	return HttpResponse("<h1>It is Image Detail page </h1>")
 
-def imageUpload(request):
+
+def image_upload(request):
 	form = ImageForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		image = form.save(commit=False)
@@ -30,8 +32,10 @@ def imageUpload(request):
 	}
 	return render(request, "image_form.html", context)
 
-def imageEdit(request):
+
+def image_edit(request):
 	return HttpResponse("<h1>It is Image Update page </h1>")
 
-def imageDelete(request):
+
+def image_delete(request):
 	return HttpResponse("<h1>It is Image Delete page </h1>")
