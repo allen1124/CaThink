@@ -58,11 +58,23 @@
                             <button class="btn btn-primary" type="submit">Sign in</button>
                         </div>
                     </form>
-                    <br>
-                    Not a member? &nbsp;&nbsp;&nbsp;
-                    <a href="{% url 'register' %}">
-                        Join imageX
-                    </a>
+					<br>
+					<table>
+						<tbody>
+							<tr>
+								<td>Not a member?</td>
+								<td>
+									<a href="{% url 'register' %}">Join imageX</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Forgot Password?</td>
+								<td>
+									<a href="{% url 'password_reset' %}">Password Reset</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
                 {% endblock %}
             </div>
         </div>
