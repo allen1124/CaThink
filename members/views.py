@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.db import transaction
 from ImageX.forms import UserForm, ProfileForm
-from django.http import HttpResponse
+from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from members.models import Profile
 
@@ -29,7 +30,7 @@ def profile_edit(request):
 			messages.success(request, 'Your profile was successfully updated!')
 			return redirect('profile_detail', request.user.id)
 		else:
-			return HttpResponse("<h1>Error</h1>")
+			messages.error(request, 'Please correct the error below.')
 	else:
 		user_form = UserForm(instance=request.user)
 		profile_form = ProfileForm(instance=request.user.profile)
@@ -37,3 +38,20 @@ def profile_edit(request):
 			'user_form': user_form,
 			'profile_form': profile_form
 			})
+
+
+def change_password(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(request.user, request.POST)
+		if form.is_valid():
+			form.save()
+			update_session_auth_hash(request, form.user)
+			messages.success(request, 'Your Password was successfully updated!')
+			return redirect('profile_detail', request.user.id)
+		else:
+			messages.error(request, 'Please correct the error below.')
+	else:
+		form = PasswordChangeForm(request.user)
+	return render(request, 'profile_change_password.html', {
+		'form': form
+	})

@@ -38,6 +38,7 @@ urlpatterns = [
 	url(r'^images/update/$', images_view.image_edit),
 	url(r'^images/delete/$', images_view.image_delete),
 	url(r'^profile/edit$', members_view.profile_edit),
+	url(r'^profile/change-password$', members_view.change_password),
 	url(r'^profile/detail/(?P<id>\d+)/$', members_view.profile_detail, name="profile_detail")
 ]
 
