@@ -14,55 +14,51 @@ from django.contrib import messages
 
 
 def index(request):
-	if request.user.is_authenticated:
-		if request.user.is_superuser:
-			return HttpResponseRedirect('/admin/')
-	return render(request, 'index.html')
+    return render(request, "index.html")
+
 
 def invitation(request):
-	if request.method == 'POST':
-		form = InvitationForm(request.POST)
-		if form.is_valid():
-			current_site = get_current_site(request)
-			mail_subject = 'Invitation to ImageX '
-			message = render_to_string('InvitationEmail.html', {
-				'user': request.user,
-				'domain': current_site.domain,
-				'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
-				'token': registration_token.make_token(request.user),
-				'email': form.cleaned_data.get('email')
-			})
-			to_email = form.cleaned_data.get('email')
-			email = EmailMessage(
-				mail_subject, message, to=[to_email]
-			)
-			email.send()
-			return HttpResponse('Your Invitation has been sent')
-		else:
-			messages.error(request, 'Please correct the error below.')
-	else:
-		form = InvitationForm()
-	return render(request, 'invitation.html', {'form': form})
+    if request.method == 'POST':
+        form = InvitationForm(request.POST)
+        if form.is_valid():
+            current_site = get_current_site(request)
+            mail_subject = 'Invitation to ImageX '
+            message = render_to_string('InvitationEmail.html', {
+                'user': request.user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
+                'token': registration_token.make_token(request.user),
+                'email': form.cleaned_data.get('email')
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return HttpResponse('Your Invitation has been sent')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = InvitationForm()
+    return render(request, 'invitation.html', {'form': form})
 
 
 def register(request, uidb64, token, email):
-	form = SignupForm(request.POST or None)
-	if request.method == 'POST' and form.is_valid():
-		try:
-			uid = force_text(urlsafe_base64_decode(uidb64))
-			user = User.objects.get(pk=uid)
-		except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-			user = None
-		if user is not None and registration_token.check_token(user, token):
-			new_user = form.save(commit=False)
-			new_user.email = email
-			new_user.save()
-			auth.login(request, new_user)
-			return HttpResponseRedirect('/')
-		else:
-			return HttpResponse('Activation link is invalid!')
-	else:
-		form = SignupForm()
-	return render(request, 'registration/register.html', {'form': form})
-
-
+    form = SignupForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+        if user is not None and registration_token.check_token(user, token):
+            new_user = form.save(commit=False)
+            new_user.email = email
+            new_user.save()
+            auth.login(request, new_user)
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponse('Activation link is invalid!')
+    else:
+        form = SignupForm()
+    return render(request, 'registration/register.html', {'form': form})
