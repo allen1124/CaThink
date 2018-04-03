@@ -25,7 +25,7 @@ from members import views as members_view
 from . import views
 
 urlpatterns = [
-	path('admin/', admin.site.urls),
+	path('admin/', admin.site.urls, name='admin'),
 	path('', index, name='index'),
 	url(r'^login/$', auth_views.login, name='login'),
 	url(r'^logout/$', auth_views.logout, name='logout'),

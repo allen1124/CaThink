@@ -8,6 +8,7 @@ from django.contrib import messages
 from members.models import Profile
 
 
+@login_required
 def profile_detail(request, id = None):
 	profile = get_object_or_404(Profile, id=id)
 	user = profile.user
