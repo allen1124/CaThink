@@ -11,6 +11,7 @@ class Profile(models.Model):
 	location = models.CharField(max_length=100, default='', blank=True)
 	no_of_images = models.IntegerField(default=0, blank=True)
 	no_of_uploads = models.IntegerField(default=0, blank=True)
+	curator = models.BooleanField(default=0, blank=True)
 
 
 @receiver(post_save, sender=User)

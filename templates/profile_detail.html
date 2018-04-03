@@ -42,8 +42,11 @@
 				</table>
 			</div>
 			{% if user.id is user_.id %}
-				<a class="btn btn-primary" href="/profile/edit">Edit</a>
-				<a class="btn btn-primary" href="/profile/change-password">Change Password</a>
+				<nav>
+					<a class="btn btn-primary" href="/profile/edit">Edit</a>
+					<a class="btn btn-primary" href="/profile/change-password">Change Password</a>
+					<a class="btn btn-primary" href="/profile/invitation">Invite Your Friend</a>
+				</nav>
 			{% endif %}
 		</div>
 	</div>

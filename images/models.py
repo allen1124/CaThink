@@ -27,7 +27,7 @@ class Image(models.Model):
 					('Still Life', 'Still Life'),
 					('Street, and Travel', 'Street, and Travel'))
 	user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
-	title = models.CharField(max_length=120)
+	title = models.CharField(max_length=120, blank=True)
 	tag = models.CharField(max_length=120, null=True, blank=True)
 	category = models.CharField(max_length=120, choices=CategoryList, null=True, blank=True)
 	image = models.ImageField(null=True, blank=False, height_field="heightField", width_field="WidthField")

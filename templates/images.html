@@ -33,7 +33,7 @@
                                 {{ image.description }}
                             </p>
                             <div class="mb-1 text-muted small">{{ image.updated }}</div>
-                            <a href="#">{{ image.username }}</a><br>
+                            <a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a><br>
                             <a class="small" href="#">#{{ image.tag }}</a>
                         </div>
                     </div>

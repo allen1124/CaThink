@@ -5,11 +5,9 @@ from members.models import Profile
 
 
 class SignupForm(UserCreationForm):
-    email = forms.EmailField(max_length=200, help_text='Required')
-
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2')
 
 
 class UserForm(forms.ModelForm):
@@ -22,3 +20,6 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('avatar', 'bio', 'location')
+
+class InvitationForm(forms.Form):
+	email = forms.EmailField(max_length=200, help_text='Required')

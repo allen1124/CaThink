@@ -1,0 +1,7 @@
+{% autoescape off %}
+	Hi Sir/Madam,
+	{{ user.username }} has invited you to use ImageX to join them.
+	Please click the url below set up your account and get started:
+
+	http://{{ domain }}{% url 'register' uidb64=uid token=token email=email %}
+{% endautoescape %}
