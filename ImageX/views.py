@@ -6,7 +6,7 @@ from .forms import SignupForm, InvitationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from .tokens import account_activation_token
+from .tokens import registration_token
 from django.utils.encoding import force_bytes, force_text
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
@@ -29,7 +29,7 @@ def invitation(request):
 				'user': request.user,
 				'domain': current_site.domain,
 				'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
-				'token': account_activation_token.make_token(request.user),
+				'token': registration_token.make_token(request.user),
 				'email': form.cleaned_data.get('email')
 			})
 			to_email = form.cleaned_data.get('email')
@@ -53,7 +53,7 @@ def register(request, uidb64, token, email):
 			user = User.objects.get(pk=uid)
 		except(TypeError, ValueError, OverflowError, User.DoesNotExist):
 			user = None
-		if user is not None and account_activation_token.check_token(user, token):
+		if user is not None and registration_token.check_token(user, token):
 			new_user = form.save(commit=False)
 			new_user.email = email
 			new_user.save()
