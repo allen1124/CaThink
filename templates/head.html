@@ -38,7 +38,7 @@
                 {% if user.is_superuser %}
                     <a class="btn btn-default" href="/admin/">Admin</a>
                 {% endif %}
-                <a class="btn btn-default" href="/images/create">Upload</a>
+                <a class="btn btn-default" href="/images/upload">Upload</a>
                 <a class="btn btn-default" href="/logout/">Logout</a>
                 <a class="btn btn-primary" href="/profile/detail/{{ user.id }}">{{ user.username }}</a>
             {% else %}

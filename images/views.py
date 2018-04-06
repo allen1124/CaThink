@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -23,7 +23,10 @@ def image_search(request):
 		else:
 			query = Q(user=user)
 	if query_category:
-		query = query & Q(category=query_category)
+		if query is not None:
+			query = query & Q(category=query_category)
+		else:
+			query = Q(category=query_category)
 	if query:
 		queryset_list = queryset_list.filter(query)
 	context = {
@@ -32,8 +35,12 @@ def image_search(request):
 	return render(request, "images.html", context)
 
 
-def image_detail(request):
-	return HttpResponse("<h1>It is Image Detail page </h1>")
+def image_detail(request, id=None):
+	image = get_object_or_404(Image, id=id)
+	context = {
+		"image": image,
+	}
+	return render(request, "image_detail.html", context)
 
 
 @login_required

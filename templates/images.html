@@ -30,10 +30,10 @@
 				</div>
 				<div class="input-group col-12 col-md-7">
 					<div class="input-group-prepend">
-						{% if request.GET.q %}
-							<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Keyword</button>
-						{% else %}
+						{% if request.GET.p %}
 							<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Photographer</button>
+						{% else %}
+							<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Keyword</button>
 						{% endif %}
 					</div>
 					{% if request.GET.q %}
@@ -61,7 +61,7 @@
 								<strong class="d-inline-block mb-2 text-primary">{{ image.category }}</strong>
 							{% endif %}
                             <h3 class="mb-0">
-                                <a class="text-dark" href="#">{{ image.title }}</a>
+                                <a class="text-dark" href="/image/detail/{{ image.id }}">{{ image.title }}</a>
                             </h3>
                             <p class="card-text mb-auto">
                                 {{ image.description }}
