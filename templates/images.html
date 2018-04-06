@@ -4,9 +4,33 @@
     <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mt-4 mb-4">
         <form method="GET" action="">
             <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
+				<div class="col-12 col-md-3">
+					<select class="form-control form-control-lg" name="cat" id="cat">
+						<option value="">--Category--</option>
+						<option value="Abstract">Abstract</option>
+						<option value="Aerial">Aerial</option>
+						<option value="Animals">Animals</option>
+						<option value="Architecture">Architecture</option>
+						<option value="Black and White">Black and White</option>
+						<option value="Family">Family</option>
+						<option value="Fashion">Fashion</option>
+						<option value="Fine Art">Fine Art</option>
+						<option value="Food">Food</option>
+						<option value="Journalism">Journalism</option>
+						<option value="Landscape">Landscape</option>
+						<option value="Macro">Macro</option>
+						<option value="Nature">Nature</option>
+						<option value="Night">Night</option>
+						<option value="People">People</option>
+						<option value="Performing Arts">Performing Arts</option>
+						<option value="Sport">Sport</option>
+						<option value="Still Life">Still Life</option>
+						<option value="Street, and Travel">Street, and Travel</option>
+					</select>
+				</div>
+                <div class="col-12 col-md-6 mb-2 mb-md-0">
                     <input type="search" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg"
-                           placeholder="Search Photo">
+                           placeholder="Search Image">
                 </div>
                 <div class="col-12 col-md-3">
                     <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
@@ -43,4 +67,7 @@
             </div>
         {% endfor %}
     </div>
+	<script type="text/javascript">
+  		document.getElementById('cat').value = "{{ request.GET.cat }}";
+	</script>
 {% endblock %}

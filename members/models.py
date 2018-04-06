@@ -9,8 +9,9 @@ class Profile(models.Model):
 	avatar = models.ImageField(upload_to="avatars", null=True, blank=True)
 	bio = models.TextField(max_length=500, default='', blank=True)
 	location = models.CharField(max_length=100, default='', blank=True)
-	remaining_quota = models.IntegerField(default=0, blank=True) #  quota - total number of images uploaded by this account
+	remaining_quota = models.IntegerField(default=3, blank=True) #  quota - total number of images uploaded by this account
 	daily_upload_count = models.IntegerField(default=0, blank=True) # the number of images uploaded on that day
+	# last_upload_time =
 	curator = models.BooleanField(default=0, blank=True)
 
 

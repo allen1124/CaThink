@@ -9,8 +9,11 @@ from .models import Image
 def image_home(request):
 	queryset_list = Image.objects.all()
 	query = request.GET.get("q")
+	category = request.GET.get("cat")
 	if query:
 		queryset_list = queryset_list.filter(Q(tag=query))
+	if category:
+		queryset_list = queryset_list.filter(Q(category=category))
 	context = {
 		"imagesList": queryset_list,
 	}
