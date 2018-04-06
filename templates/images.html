@@ -36,10 +36,10 @@
 							<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Keyword</button>
 						{% endif %}
 					</div>
-					{% if request.GET.q %}
-						<input type="search" id="query" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg">
-					{% else %}
+					{% if request.GET.p %}
 						<input type="search" id="query" name="p" value="{{ request.GET.p }}" class="form-control form-control-lg">
+					{% else %}
+						<input type="search" id="query" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg">
 					{% endif %}
 				</div>
                 <div class="col-12 col-md-2">
@@ -61,10 +61,10 @@
 								<strong class="d-inline-block mb-2 text-primary">{{ image.category }}</strong>
 							{% endif %}
                             <h3 class="mb-0">
-                                <a class="text-dark" href="/image/detail/{{ image.id }}">{{ image.title }}</a>
+                                <a class="text-dark" href="/images/detail/{{ image.id }}">{{ image.title }}</a>
                             </h3>
                             <p class="card-text mb-auto">
-                                {{ image.description }}
+                                {{ image.description|linebreaks|truncatechars:200 }}
                             </p>
                             <div class="mb-1 text-muted small">{{ image.updated }}</div>
                             <a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a><br>

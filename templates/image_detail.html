@@ -1,5 +1,44 @@
 {% extends 'head.html' %}
 
 {% block content %}
-
+	<div class="container mt-5 mb-5">
+		<div class="col-md-12 mb-3">
+			<img src="{{ image.image.url }}" class="img-responsive" width="100%" height="100%">
+		</div>
+		<div class="col-md-12 mb-3">
+			<table class="table">
+				<h1>{{ image.title }}</h1>
+					<tbody>
+					<tr>
+						<td>Category:</td>
+						<td><strong class="d-inline-block mb-2 text-primary">{{ image.category }}</strong></td>
+					</tr>
+					<tr>
+						<td>Uploaded by:</td>
+						<td><a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a></td>
+					</tr>
+					<tr>
+						<td>Description:</td>
+						<td>{{ image.description|linebreaks }}</td>
+					</tr>
+					<tr>
+						<td>Tags:</td>
+						<td>
+						{% if image.tag %}
+							{{ image.tag }}
+						{% endif %}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a class="btn btn-primary" href="">Download</a>
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}
