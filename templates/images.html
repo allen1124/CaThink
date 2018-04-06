@@ -28,11 +28,13 @@
 						<option value="Street, and Travel">Street, and Travel</option>
 					</select>
 				</div>
-                <div class="col-12 col-md-6 mb-2 mb-md-0">
-                    <input type="search" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg"
-                           placeholder="Search Image">
-                </div>
-                <div class="col-12 col-md-3">
+				<div class="input-group col-12 col-md-7">
+					<div class="input-group-prepend">
+						<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Keyword</button>
+					</div>
+					<input type="search" id="query" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg">
+				</div>
+                <div class="col-12 col-md-2">
                     <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
                 </div>
             </div>
@@ -69,5 +71,14 @@
     </div>
 	<script type="text/javascript">
   		document.getElementById('cat').value = "{{ request.GET.cat }}";
+  		$('#search_by').click(function(e){
+			$(this).text(function(_, value) {
+                return value == 'Search by Keyword' ? 'Search by Photographer' : 'Search by Keyword';
+            });
+			if($('#query').attr('name') == 'q')
+				$('#query').attr('name', 'p');
+			else
+			    $('#query').attr('name', 'q');
+        });
 	</script>
 {% endblock %}
