@@ -37,6 +37,7 @@ urlpatterns = [
 	url(r'^images/$', images_view.image_search, name='images'),
 	url(r'^images/upload/$', images_view.image_upload),
 	url(r'^images/detail/(?P<id>\d+)/$', images_view.image_detail, name="image_detail"),
+	url(r'^images/download/(?P<id>\d+)/$', images_view.image_download, name="image_download"),
 	url(r'^images/update/$', images_view.image_edit),
 	url(r'^images/delete/$', images_view.image_delete),
 	url(r'^profile/edit$', members_view.profile_edit),
