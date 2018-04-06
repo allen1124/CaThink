@@ -6,7 +6,7 @@ from .forms import ImageForm
 from .models import Image
 
 
-def image_home(request):
+def image_search(request):
 	queryset_list = Image.objects.all()
 	query = request.GET.get("q")
 	category = request.GET.get("cat")

@@ -34,7 +34,7 @@ urlpatterns = [
 	url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
 		auth_views.password_reset_confirm, name='password_reset_confirm'),
 	url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
-	url(r'^images/$', images_view.image_home, name='images'),
+	url(r'^images/$', images_view.image_search, name='images'),
 	url(r'^images/create/$', images_view.image_upload),
 	url(r'^images/detail/$', images_view.image_detail),
 	url(r'^images/update/$', images_view.image_edit),
