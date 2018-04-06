@@ -19,8 +19,9 @@ def image_search(request):
 		try:
 			user = User.objects.get(username=query_string_p)
 		except User.DoesNotExist:
-			pass
-		query = Q(user=user)
+			query = Q(pk__in=[])
+		else:
+			query = Q(user=user)
 	if query_category:
 		query = query & Q(category=query_category)
 	if query:

@@ -30,9 +30,17 @@
 				</div>
 				<div class="input-group col-12 col-md-7">
 					<div class="input-group-prepend">
-						<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Keyword</button>
+						{% if request.GET.q %}
+							<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Keyword</button>
+						{% else %}
+							<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Photographer</button>
+						{% endif %}
 					</div>
-					<input type="search" id="query" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg">
+					{% if request.GET.q %}
+						<input type="search" id="query" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg">
+					{% else %}
+						<input type="search" id="query" name="p" value="{{ request.GET.p }}" class="form-control form-control-lg">
+					{% endif %}
 				</div>
                 <div class="col-12 col-md-2">
                     <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
