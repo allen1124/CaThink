@@ -77,6 +77,23 @@
             </div>
         {% endfor %}
     </div>
+	<div class="pagination">
+        <span class="step-links">
+            {% if imagesList.has_previous %}
+				<a href="?page=1{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">&laquo; first</a>
+                <a href="?page={{ imagesList.previous_page_number }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">previous
+                </a>
+            {% endif %}
+            <span class="current">
+                Page {{ imagesList.number }} of {{ imagesList.paginator.num_pages }}.
+            </span>
+            {% if imagesList.has_next %}
+                <a href="?page={{ imagesList.next_page_number }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">next</a>
+                <a href="?page={{ imagesList.paginator.num_pages }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
 	<script type="text/javascript">
   		document.getElementById('cat').value = "{{ request.GET.cat }}";
   		$('#search_by').click(function(e){

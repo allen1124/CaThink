@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ImageForm
 from .models import Image
 from django.contrib.auth.models import User
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def image_search(request):
 	queryset_list = Image.objects.all()
@@ -29,6 +29,9 @@ def image_search(request):
 			query = Q(category=query_category)
 	if query:
 		queryset_list = queryset_list.filter(query)
+	paginator = Paginator(queryset_list, 12)
+	page = request.GET.get('page')
+	queryset_list = paginator.get_page(page)
 	context = {
 		"imagesList": queryset_list,
 	}
