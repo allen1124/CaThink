@@ -11,7 +11,7 @@ class Profile(models.Model):
 	location = models.CharField(max_length=100, default='', blank=True)
 	remaining_quota = models.IntegerField(default=3, blank=True) #  quota - total number of images uploaded by this account
 	daily_upload_count = models.IntegerField(default=0, blank=True) # the number of images uploaded on that day, 4
-	last_upload_time = models.DateTimeField(null=True,blank=True)
+	last_upload_time = models.DateTimeField(default = datetime.now(), null=True, blank=True)
 	curator = models.BooleanField(default=0, blank=True)
 
 
