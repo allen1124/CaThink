@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from datetime import datetime
 from django.contrib import messages
-from tagging.models import Tag, TaggedItem
+from tagging.models import TaggedItem
 import re
 
 
@@ -37,13 +37,9 @@ def image_search(request):
 			else:
 				query = query | Q(user=user)
 		queryset_list = queryset_list.filter(query)
-<<<<<<< HEAD
-	paginator = Paginator(queryset_list, 10)
-=======
 	if query_category:
 		queryset_list = queryset_list.filter(Q(category=query_category))
 	paginator = Paginator(queryset_list, 12)
->>>>>>> ed59430219e3df1b5d2e28bfb8b9f785940f1361
 	page = request.GET.get('page')
 	queryset_list = paginator.get_page(page)
 	context = {

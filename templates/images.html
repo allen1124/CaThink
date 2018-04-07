@@ -96,14 +96,9 @@
             </div>
         {% endfor %}
     </div>
-<<<<<<< HEAD
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-=======
 	<div class="pagination" style="margin:auto;">
         <span class="step-links" style="margin:auto; display:table;">
->>>>>>> ed59430219e3df1b5d2e28bfb8b9f785940f1361
             {% if imagesList.has_previous %}
                 <li>
                     <a href="?page=1{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}" class="page-link">&laquo;&laquo;</a>
@@ -125,8 +120,8 @@
                     <a href="?page={{ imagesList.paginator.num_pages }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}" class="page-link">&raquo;&raquo;</a>
                 </li>
             {% endif %}
-        </ul>
-    </nav>
+		</span>
+	</div>
 
 
 
