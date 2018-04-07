@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from tagging.fields import TagField
 
 # Create your models here.
 
@@ -28,7 +29,7 @@ class Image(models.Model):
 					('Street, and Travel', 'Street, and Travel'))
 	user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
 	title = models.CharField(max_length=120, blank=True)
-	tag = models.CharField(max_length=120, null=True, blank=True)
+	tag = TagField(blank=True)
 	category = models.CharField(max_length=120, choices=CategoryList, null=True, blank=True)
 	image = models.ImageField(null=True, blank=False, height_field="heightField", width_field="WidthField")
 	heightField = models.IntegerField(default=0)

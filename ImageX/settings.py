@@ -146,3 +146,6 @@ EMAIL_HOST_USER = 'imagex.cathink@gmail.com'
 EMAIL_HOST_PASSWORD = 'cathink123'
 
 EMAIL_PORT = 587
+
+#Tagging Setting
+FORCE_LOWERCASE_TAGS = True
