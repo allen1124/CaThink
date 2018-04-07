@@ -44,7 +44,7 @@ class Image(models.Model):
 		return self.title
 
 	def get_absolute_url(self):
-		return reverse("images:detail", kwargs={"id": self.id})
+		return reverse("image_detail", kwargs={"id": self.id})
 
 	class Meta:
 		ordering = ["-timestamp", "-updated"]

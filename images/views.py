@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import ImageForm
 from .models import Image
 from members.models import Profile
 from django.contrib.auth.models import User
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 from datetime import datetime
-from wsgiref.util import FileWrapper
-import mimetypes, os
+from django.contrib import messages
 
 def image_search(request):
 	queryset_list = Image.objects.all()
@@ -68,26 +67,31 @@ def image_upload(request):
 			user_profile.save()
 			return redirect('images')
 	else:
-		return HttpResponse("<h1>Sorry, You have reached the upload limit. Please delete your images and upload on next day.</h1>")
+		messages.warning(request, "Sorry, you have reached the upload limit. Please delete your images or upload later.")
+		return redirect('images')
 	context = {
 		"form": form
 	}
 	return render(request, "image_form.html", context)
 
 
-def image_download(request, id):
-	img = Image.objects.get(id=id)
-	wrapper = FileWrapper(open(img.image.file.get))
-	content_type = mimetypes.guess_type(img.image.name)[0]
-	response = HttpResponse(wrapper, content_type=content_type)
-	response['Content-Length'] = os.path.getsize(img.image.file)
-	response['Content-Disposition'] = "attachment; filename=%s" % img.title
-	return response
+def image_edit(request, id=None):
+	image = get_object_or_404(Image, id=id)
+	form = ImageForm(request.POST or None, instance=image)
+	if form.is_valid():
+		image = form.save(commit=False)
+		image.save()
+		messages.success(request, "Image has been updated.")
+		return HttpResponseRedirect(image.get_absolute_url())
+	context = {
+		"image": image,
+		"form": form,
+	}
+	return render(request, "image_edit.html", context)
 
 
-def image_edit(request):
-	return HttpResponse("<h1>It is Image Update page </h1>")
-
-
-def image_delete(request):
-	return HttpResponse("<h1>It is Image Delete page </h1>")
+def image_delete(request, id=None):
+	image = get_object_or_404(Image, id=id)
+	image.delete()
+	messages.success(request, "Image has been deleted.")
+	return redirect('images')
