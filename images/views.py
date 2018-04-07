@@ -66,6 +66,12 @@ def image_upload(request):
 	if user_profile.daily_upload_count < 4 and user_profile.remaining_quota >= 1:
 		if form.is_valid():
 			image = form.save(commit=False)
+			if len(normalize_query(form.cleaned_data['tag'])) > 10:
+				messages.warning(request,"Sorry, you have added too many tags in a image")
+				context = {
+					"form": form
+				}
+				return render(request, "image_form.html", context)
 			image.user = request.user
 			image.save()
 			user_profile.daily_upload_count += 1
@@ -87,6 +93,12 @@ def image_edit(request, id=None):
 	form = ImageForm(request.POST or None, instance=image)
 	if form.is_valid():
 		image = form.save(commit=False)
+		if len(normalize_query(form.cleaned_data['tag'])) > 10:
+			messages.warning(request, "Sorry, you have added too many tags in a image")
+			context = {
+				"form": form
+			}
+			return render(request, "image_edit.html", context)
 		image.save()
 		messages.success(request, "Image has been updated.")
 		return HttpResponseRedirect(image.get_absolute_url())
