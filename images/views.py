@@ -32,7 +32,7 @@ def image_search(request):
 			query = Q(category=query_category)
 	if query:
 		queryset_list = queryset_list.filter(query)
-	paginator = Paginator(queryset_list, 12)
+	paginator = Paginator(queryset_list, 10)
 	page = request.GET.get('page')
 	queryset_list = paginator.get_page(page)
 	context = {

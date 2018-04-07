@@ -85,22 +85,34 @@
             </div>
         {% endfor %}
     </div>
-	<div class="pagination">
-        <span class="step-links">
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
             {% if imagesList.has_previous %}
-				<a href="?page=1{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">&laquo; first</a>
-                <a href="?page={{ imagesList.previous_page_number }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">previous
-                </a>
+                <li>
+                    <a href="?page=1{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}" class="page-link">&laquo;&laquo;</a>
+                </li>
+                <li class="page-item">
+                 <a href="?page={{ imagesList.previous_page_number }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}" class="page-link">previous</a>
+                </li>
             {% endif %}
-            <span class="current">
-                Page {{ imagesList.number }} of {{ imagesList.paginator.num_pages }}.
-            </span>
+            <li class="page-item disabled">
+                <span class="current page-link">
+                    Page {{ imagesList.number }} of {{ imagesList.paginator.num_pages }}
+                </span>
+            </li>
             {% if imagesList.has_next %}
-                <a href="?page={{ imagesList.next_page_number }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">next</a>
-                <a href="?page={{ imagesList.paginator.num_pages }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}">last &raquo;</a>
+                <li class="page-item">
+                    <a href="?page={{ imagesList.next_page_number }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}" class="page-link">next</a>
+                </li>
+                <li class="page-item">
+                    <a href="?page={{ imagesList.paginator.num_pages }}{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}" class="page-link">&raquo;&raquo;</a>
+                </li>
             {% endif %}
-        </span>
-    </div>
+        </ul>
+    </nav>
+
+
 
 	<script type="text/javascript">
   		document.getElementById('cat').value = "{{ request.GET.cat }}";
