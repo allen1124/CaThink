@@ -1,7 +1,7 @@
 {% extends 'head.html' %}
 
 {% block content %}
-    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mt-4 mb-4">
+    <div class="col-md-10 col-lg-9 col-xl-8 mx-auto mt-4 mb-4">
         <form method="GET" action="">
             <div class="form-row">
 			{% if messages %}
@@ -53,6 +53,17 @@
                 <div class="col-12 col-md-2">
                     <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
                 </div>
+
+				<div class="input-group mt-2 col-12 col-md-4">
+					<div class="input-group-prepend">
+						<label class="input-group-text" for="search_order">Order by</label>
+					</div>
+					<select class="custom-select" id="search_order">
+						<option value="0" selected>Most recent</option>
+						<option value="1">Most popular</option>
+					</select>
+				</div>
+
             </div>
         </form>
     </div>
@@ -85,9 +96,14 @@
             </div>
         {% endfor %}
     </div>
+<<<<<<< HEAD
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
+=======
+	<div class="pagination" style="margin:auto;">
+        <span class="step-links" style="margin:auto; display:table;">
+>>>>>>> ed59430219e3df1b5d2e28bfb8b9f785940f1361
             {% if imagesList.has_previous %}
                 <li>
                     <a href="?page=1{% if request.GET.cat %}&cat={{ request.GET.cat }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}" class="page-link">&laquo;&laquo;</a>
