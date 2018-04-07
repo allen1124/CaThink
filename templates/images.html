@@ -68,7 +68,7 @@
         </form>
     </div>
 
-    <div class="row mb-2 text-center text-lg-left ml-2 mr-2">
+    <div class="row mb-2 text-lg-left ml-2 mr-2">
         {% for image in imagesList %}
             <div class="col-md-6">
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
@@ -90,8 +90,7 @@
                             <a class="small" href="#">#{{ image.tag }}</a>
                         </div>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" id="responsive-image" width="70%"
-                         height="100%" src="{{ image.image.url }}" alt="Card image cap">
+                    <img id="responsive-image" width="70%" height="100%" src="{{ image.image.url }}" alt="Card image cap">
                 </div>
             </div>
         {% endfor %}
