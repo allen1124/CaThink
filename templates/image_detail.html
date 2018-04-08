@@ -32,9 +32,9 @@
 					<tr>
 						<td>Tags:</td>
 						<td>
-						{% if image.tag %}
-							{{ image.tag }}
-						{% endif %}
+							{% for tag in image.tag.split %}
+                            	<a class="small" href="/images/?q={{ tag }}">#{{ tag }}</a>
+							{% endfor %}
 						</td>
 					</tr>
 					<tr>
@@ -46,6 +46,7 @@
 							{% endif %}
 						</td>
 						<td>
+							<a class="btn btn-primary" href="/images/?q={{ image.tag }}">Similar images</a>
 						</td>
 					</tr>
 				</tbody>

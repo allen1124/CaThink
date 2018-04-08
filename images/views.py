@@ -72,7 +72,7 @@ def image_upload(request):
 					"form": form
 				}
 				return render(request, "image_form.html", context)
-			if form.cleaned_data['image'].content_type is not "image/jpeg":
+			if not str(form.cleaned_data['image'].content_type).endswith("jpeg"):
 				messages.warning(request, "Sorry, imageX supports only the JPEG file format.")
 				context = {
 					"form": form
@@ -101,6 +101,12 @@ def image_edit(request, id=None):
 		image = form.save(commit=False)
 		if len(normalize_query(form.cleaned_data['tag'])) > 10:
 			messages.warning(request, "Sorry, you have added too many tags in a image")
+			context = {
+				"form": form
+			}
+			return render(request, "image_edit.html", context)
+		if not str(form.cleaned_data['image'].content_type).endswith("jpeg"):
+			messages.warning(request, "Sorry, imageX supports only the JPEG file format.")
 			context = {
 				"form": form
 			}
