@@ -87,7 +87,9 @@
                             </p>
                             <div class="mb-1 text-muted small">{{ image.updated }}</div>
                             <a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a><br>
-                            <a class="small" href="#">#{{ image.tag }}</a>
+							{% for tag in image.tag.split %}
+                            	<a class="small" href="?q={{ tag }}">#{{ tag }}</a>
+							{% endfor %}
                         </div>
                     </div>
                     <img id="responsive-image" width="70%" height="100%" src="{{ image.image.url }}" alt="Card image cap">
