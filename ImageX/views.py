@@ -1,6 +1,6 @@
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import SignupForm, InvitationForm
 from django.contrib.sites.shortcuts import get_current_site

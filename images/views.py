@@ -72,6 +72,12 @@ def image_upload(request):
 					"form": form
 				}
 				return render(request, "image_form.html", context)
+			if form.cleaned_data['image'].content_type is not "image/jpeg":
+				messages.warning(request, "Sorry, imageX supports only the JPEG file format.")
+				context = {
+					"form": form
+				}
+				return render(request, "image_form.html", context)
 			image.user = request.user
 			image.save()
 			user_profile.daily_upload_count += 1

@@ -6,10 +6,7 @@ from tagging.fields import TagField
 
 
 # Create your models here.
-
-
-class Image(models.Model):
-	CategoryList = (('Abstract', 'Abstract'),
+CategoryList = (('Abstract', 'Abstract'),
 					('Aerial', 'Aerial'),
 					('Animals', 'Animals'),
 					('Architecture', 'Architecture'),
@@ -28,6 +25,8 @@ class Image(models.Model):
 					('Sport', 'Sport'),
 					('Still Life', 'Still Life'),
 					('Street, and Travel', 'Street, and Travel'))
+
+class Image(models.Model):
 	user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
 	title = models.CharField(max_length=120, blank=True)
 	tag = TagField(blank=True)
@@ -51,3 +50,14 @@ class Image(models.Model):
 	class Meta:
 		ordering = ["-timestamp", "-updated"]
 
+
+class Gallery(models.Model):
+	user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+	title = models.CharField(max_length=120, blank=True)
+	category = models.CharField(max_length=120, choices=CategoryList, null=True, blank=True)
+	tag = TagField(blank=True)
+	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+	class Meta:
+		ordering = ["-timestamp", "-updated"]
