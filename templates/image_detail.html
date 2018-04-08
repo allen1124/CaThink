@@ -42,7 +42,7 @@
 							<a class="btn btn-primary" href="{{ image.image.url }}" download="{{ image.title }}">Download</a>
 							{% if image.user.id is user.id %}
 								<a class="btn btn-primary" href="/images/edit/{{ image.id }}">Edit</a>
-								<a class="btn btn-primary" href="/images/delete/{{ image.id }}">Delete</a>
+								<a class="btn btn-primary" href="/images/delete/{{ image.id }}" onclick="return confirm('Are you sure to delete this image?')">Delete</a>
 							{% endif %}
 						</td>
 						<td>
