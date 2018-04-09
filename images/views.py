@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from .forms import ImageForm
+from .forms import ImageForm, ImageEditForm
 from .models import Image
 from members.models import Profile
 from django.contrib.auth.models import User
@@ -104,18 +104,11 @@ def image_upload(request):
 @login_required
 def image_edit(request, id=None):
     image = get_object_or_404(Image, id=id)
-    form = ImageForm(request.POST or None, instance=image)
+    form = ImageEditForm(request.POST or None, instance=image)
     if form.is_valid():
         image = form.save(commit=False)
         if len(normalize_query(form.cleaned_data['tag'])) > 10:
             messages.warning(request, "Sorry, you have added too many tags in a image")
-            context = {
-                "form": form
-            }
-            return render(request, "image_edit.html", context)
-        if not (str(form.cleaned_data['image'].content_type).endswith("jpeg") or str(
-                form.cleaned_data['image'].content_type).endswith("jpg")):
-            messages.warning(request, "Sorry, imageX supports only the JPEG file format.")
             context = {
                 "form": form
             }

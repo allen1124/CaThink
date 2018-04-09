@@ -76,13 +76,13 @@
                         	word-break: break-word; -webkit-hyphens: auto;
 							-moz-hyphens: auto; hyphens: auto;">
 							{% if image.category != None %}
-								<strong class="d-inline-block mb-2 text-primary">{{ image.category }}</strong>
+								<strong class="d-inline-block mb-2 text-primary"><a href="?cat={{ image.category }}">{{ image.category }}</a></strong>
 							{% endif %}
                             <h3 class="mb-0">
                                 <a class="text-dark" href="/images/detail/{{ image.id }}">{{ image.title }}</a>
                             </h3>
                             <p class="card-text mb-auto">
-                                {{ image.description|linebreaks|truncatechars:200 }}
+                                {{ image.description|linebreaks|truncatechars:50 }}
                             </p>
                             <div class="mb-1 text-muted small">{{ image.updated }}</div>
                             <a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a><br>
