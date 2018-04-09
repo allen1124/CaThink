@@ -23,6 +23,7 @@ def image_search(request):
 	query_string_q = request.GET.get("q")
 	query_string_p = request.GET.get("p")
 	query_category = request.GET.get("cat")
+	ordering = request.GET.get("order")
 	query = Q(pk__in=[])
 	if query_string_q:
 		terms = normalize_query(query_string_q.lower())
@@ -39,6 +40,10 @@ def image_search(request):
 		queryset_list = queryset_list.filter(query)
 	if query_category:
 		queryset_list = queryset_list.filter(Q(category=query_category))
+	if ordering is "1":
+		queryset_list = queryset_list.order_by("-timestamp")
+	elif ordering is "2":
+		queryset_list = queryset_list.order_by("title") # 2 - order by popularity
 	paginator = Paginator(queryset_list, 12)
 	page = request.GET.get('page')
 	queryset_list = paginator.get_page(page)
@@ -72,7 +77,7 @@ def image_upload(request):
 					"form": form
 				}
 				return render(request, "image_form.html", context)
-			if not str(form.cleaned_data['image'].content_type).endswith("jpeg"):
+			if not( str(form.cleaned_data['image'].content_type).endswith("jpeg") or str(form.cleaned_data['image'].content_type).endswith("jpg")):
 				messages.warning(request, "Sorry, imageX supports only the JPEG file format.")
 				context = {
 					"form": form
@@ -105,7 +110,7 @@ def image_edit(request, id=None):
 				"form": form
 			}
 			return render(request, "image_edit.html", context)
-		if not str(form.cleaned_data['image'].content_type).endswith("jpeg"):
+		if not( str(form.cleaned_data['image'].content_type).endswith("jpeg") or str(form.cleaned_data['image'].content_type).endswith("jpg")):
 			messages.warning(request, "Sorry, imageX supports only the JPEG file format.")
 			context = {
 				"form": form

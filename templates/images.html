@@ -1,7 +1,7 @@
 {% extends 'head.html' %}
 
 {% block content %}
-    <div class="col-md-10 col-lg-9 col-xl-8 mx-auto mt-4 mb-4">
+    <div class="col-md-11 col-lg-10 col-xl-10 mx-auto mt-4 mb-4">
         <form method="GET" action="">
             <div class="form-row">
 			{% if messages %}
@@ -36,7 +36,7 @@
 						<option value="Street, and Travel">Street, and Travel</option>
 					</select>
 				</div>
-				<div class="input-group col-12 col-md-7">
+				<div class="input-group col-12 col-md-6">
 					<div class="input-group-prepend">
 						{% if request.GET.p %}
 							<button class="btn btn-outline-secondary" type="button" id="search_by">Search by Photographer</button>
@@ -50,20 +50,19 @@
 						<input type="search" id="query" name="q" value="{{ request.GET.q }}" class="form-control form-control-lg">
 					{% endif %}
 				</div>
-                <div class="col-12 col-md-2">
-                    <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
-                </div>
-
-				<div class="input-group mt-2 col-12 col-md-4">
+				<div class="input-group col-12 col-md-3">
 					<div class="input-group-prepend">
 						<label class="input-group-text" for="search_order">Order by</label>
 					</div>
-					<select class="custom-select" id="search_order">
-						<option value="0" selected>Most recent</option>
-						<option value="1">Most popular</option>
+					<select class="form-control form-control-lg" name="order" id="order">
+						<option value="0" selected>----------</option>
+						<option value="1">Most recent</option>
+						<option value="2">Most popular</option>
 					</select>
 				</div>
-
+				<div class="col-md-5 col-lg-5 col-xl-4 mx-auto mt-2 mb-4">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
+                </div>
             </div>
         </form>
     </div>
@@ -92,7 +91,8 @@
 							{% endfor %}
                         </div>
                     </div>
-                    <img id="responsive-image" width="70%" height="100%" src="{{ image.image.url }}" alt="Card image cap">
+						<img id="responsive-image" width="70%" height="100%" src="{{ image.image.url }}" alt="Card image cap">
+						<a href="/images/detail/{{ image.id }}"></a>
                 </div>
             </div>
         {% endfor %}
@@ -128,6 +128,7 @@
 
 	<script type="text/javascript">
   		document.getElementById('cat').value = "{{ request.GET.cat }}";
+  		document.getElementById('order').value = "{{ request.GET.order }}";
   		$('#search_by').click(function(e){
 			$(this).text(function(_, value) {
                 return value == 'Search by Keyword' ? 'Search by Photographer' : 'Search by Keyword';

@@ -47,8 +47,6 @@ class Image(models.Model):
 	def get_absolute_url(self):
 		return reverse("image_detail", kwargs={"id": self.id})
 
-	class Meta:
-		ordering = ["-timestamp", "-updated"]
 
 
 class Gallery(models.Model):
@@ -58,6 +56,3 @@ class Gallery(models.Model):
 	tag = TagField(blank=True)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-
-	class Meta:
-		ordering = ["-timestamp", "-updated"]
