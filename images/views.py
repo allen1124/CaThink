@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import ImageForm, ImageEditForm
@@ -104,30 +104,36 @@ def image_upload(request):
 @login_required
 def image_edit(request, id=None):
     image = get_object_or_404(Image, id=id)
-    form = ImageEditForm(request.POST or None, instance=image)
-    if form.is_valid():
-        image = form.save(commit=False)
-        if len(normalize_query(form.cleaned_data['tag'])) > 10:
-            messages.warning(request, "Sorry, you have added too many tags in a image")
-            context = {
-                "form": form
-            }
-            return render(request, "image_edit.html", context)
-        image.save()
-        messages.success(request, "Image has been updated.")
-        return HttpResponseRedirect(image.get_absolute_url())
-    context = {
-        "image": image,
-        "form": form,
-    }
-    return render(request, "image_edit.html", context)
+    if image.user == request.user:
+        form = ImageEditForm(request.POST or None, instance=image)
+        if form.is_valid():
+            image = form.save(commit=False)
+            if len(normalize_query(form.cleaned_data['tag'])) > 10:
+                messages.warning(request, "Sorry, you have added too many tags in a image")
+                context = {
+                    "form": form
+                }
+                return render(request, "image_edit.html", context)
+            image.save()
+            messages.success(request, "Image has been updated.")
+            return HttpResponseRedirect(image.get_absolute_url())
+        context = {
+            "image": image,
+            "form": form,
+        }
+        return render(request, "image_edit.html", context)
+    else:
+        return HttpResponse('Sorry, you don\'t have the permission to do so')
 
 @login_required
 def image_delete(request, id=None):
     image = get_object_or_404(Image, id=id)
-    user_profile = get_object_or_404(Profile, user=image.user)
-    user_profile.remaining_quota += 1
-    user_profile.save()
-    image.delete()
-    messages.success(request, "Image has been deleted.")
-    return redirect('images')
+    if image.user == request.user:
+        user_profile = get_object_or_404(Profile, user=image.user)
+        user_profile.remaining_quota += 1
+        user_profile.save()
+        image.delete()
+        messages.success(request, "Image has been deleted.")
+        return redirect('images')
+    else:
+        return HttpResponse('Sorry, you don\'t have the permission to do so')
