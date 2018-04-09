@@ -61,6 +61,16 @@ def image_detail(request, id=None):
     }
     return render(request, "image_detail.html", context)
 
+def image_download(request, id=None):
+    image = get_object_or_404(Image, id=id)
+    image.download_count += 1
+    image.save()
+    response = HttpResponse(image.image, content_type='image/jpg')
+    if image.title:
+        response['Content-Disposition'] = 'attachment;filename="%s.jpg"' % image.title
+    else:
+        response['Content-Disposition'] = 'attachment;filename="%s"' % image.filename()
+    return response
 
 @login_required
 def image_upload(request):

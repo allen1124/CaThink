@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from tagging.fields import TagField
+import os
 
 
 # Create your models here.
@@ -35,6 +36,7 @@ class Image(models.Model):
 	heightField = models.IntegerField(default=0)
 	WidthField = models.IntegerField(default=0)
 	description = models.TextField(blank=True)
+	download_count = models.IntegerField(default=0, blank=True)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
@@ -46,6 +48,9 @@ class Image(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("image_detail", kwargs={"id": self.id})
+
+	def filename(self):
+		return os.path.basename(self.image.name)
 
 
 

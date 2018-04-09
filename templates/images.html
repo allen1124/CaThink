@@ -84,11 +84,12 @@
                             <p class="card-text mb-auto">
                                 {{ image.description|linebreaks|truncatechars:50 }}
                             </p>
-                            <div class="mb-1 text-muted small">{{ image.updated }}</div>
+                            <div class="mb-1 text-muted small">Upload at: {{ image.timestamp|date:'SHORT_DATETIME_FORMAT'}}</div>
                             <a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a><br>
 							{% for tag in image.tag.split %}
                             	<a class="small" href="?q={{ tag }}">#{{ tag }}</a>
 							{% endfor %}
+							<p><i class="material-icons" style="font-size:15px;">file_download</i>{{ image.download_count }}</p>
                         </div>
                     </div>
 						<img id="responsive-image" width="70%" height="100%" src="{{ image.image.url }}" alt="Card image cap">

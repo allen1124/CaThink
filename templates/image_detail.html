@@ -38,8 +38,12 @@
 						</td>
 					</tr>
 					<tr>
+						<td>Downloads Count:</td>
+						<td><i class="material-icons">file_download</i>{{ image.download_count }}</td>
+					</tr>
+					<tr>
 						<td>
-							<a class="btn btn-primary" href="{{ image.image.url }}" download="{{ image.title }}">Download</a>
+							<a class="btn btn-primary" href="/images/download/{{ image.id }}">Download</a>
 							{% if image.user.id is user.id %}
 								<a class="btn btn-primary" href="/images/edit/{{ image.id }}">Edit</a>
 								<a class="btn btn-primary" href="/images/delete/{{ image.id }}" onclick="return confirm('Are you sure to delete this image?')">Delete</a>
