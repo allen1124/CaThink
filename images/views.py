@@ -54,7 +54,9 @@ def image_search(request):
     paginator = Paginator(queryset_list, 12)
     page = request.GET.get('page')
     queryset_list = paginator.get_page(page)
-    liked_images = Image.objects.filter(likes=request.user)
+    liked_images = None
+    if request.user.is_authenticated:
+        liked_images = Image.objects.filter(likes=request.user)
     context = {
         "imagesList": queryset_list,
         "likedImages": liked_images,
