@@ -26,8 +26,8 @@
     <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
 
     <!-- Custom icon -->
-    <link rel="shortcut icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
-    <link rel="icon" href="{% static 'img//favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
 </head>
 
 <body>
@@ -108,6 +108,12 @@
 
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'jquery/jquery.min.js' %}"></script>
-<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}></script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+	$(document).ready(function(){
+		{% block jquery %}
+		{% endblock %}
+	})
+</script>
 </body>
 </html>

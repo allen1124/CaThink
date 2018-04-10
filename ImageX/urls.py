@@ -22,6 +22,7 @@ from django.contrib.auth import views as auth_views
 from ImageX.views import index, register, invitation
 from images import views as images_view
 from members import views as members_view
+from images.views import ImageLikesAPIToggle
 
 
 urlpatterns = [
@@ -37,6 +38,7 @@ urlpatterns = [
 	url(r'^images/$', images_view.image_search, name='images'),
 	url(r'^images/upload/$', images_view.image_upload),
 	url(r'^images/detail/(?P<id>\d+)/$', images_view.image_detail, name="image_detail"),
+	url(r'^images/like/api/(?P<id>\d+)/$', ImageLikesAPIToggle.as_view(), name="like-api-toggle"),
 	url(r'^images/edit/(?P<id>\d+)/$', images_view.image_edit),
 	url(r'^images/delete/(?P<id>\d+)/$', images_view.image_delete),
 	url(r'^images/download/(?P<id>\d+)/$', images_view.image_download),

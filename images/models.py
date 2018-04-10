@@ -37,6 +37,7 @@ class Image(models.Model):
 	WidthField = models.IntegerField(default=0)
 	description = models.TextField(blank=True)
 	download_count = models.IntegerField(default=0, blank=True)
+	likes = models.ManyToManyField(User, blank=True, related_name="image_likes")
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
@@ -48,6 +49,9 @@ class Image(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("image_detail", kwargs={"id": self.id})
+
+	def get_api_like_url(self):
+		return reverse("like-api-toggle", kwargs={"id": self.id})
 
 	def filename(self):
 		return os.path.basename(self.image.name)

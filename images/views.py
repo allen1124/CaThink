@@ -10,6 +10,10 @@ from django.core.paginator import Paginator
 from datetime import datetime
 from django.contrib import messages
 from tagging.models import TaggedItem
+from django.views.generic import RedirectView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
 import re
 
 
@@ -147,3 +151,26 @@ def image_delete(request, id=None):
         return redirect('images')
     else:
         return HttpResponse('Sorry, you don\'t have the permission to do so')
+
+class ImageLikesAPIToggle(APIView):
+    authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, format=None, id=None):
+        image = get_object_or_404(Image, id=id)
+        user = self.request.user
+        updated = False
+        liked = False
+        if user.is_authenticated:
+            if user in image.likes.all():
+                liked = False
+                image.likes.remove(user)
+            else:
+                liked = True
+                image.likes.add(user)
+            updated = True
+        data = {
+            "updated": updated,
+            "liked": liked
+        }
+        return Response(data)
