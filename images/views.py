@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from datetime import datetime
 from django.contrib import messages
-from tagging.models import TaggedItem
+from tagging.models import TaggedItem, Tag
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
@@ -23,15 +23,18 @@ def normalize_query(query_string,
 
 
 def image_search(request):
-    queryset_list = Image.objects.all().order_by("-timestamp")
+    queryset_list = Image.objects.all().exclude(id=1)
     query_string_q = request.GET.get("q")
     query_string_p = request.GET.get("p")
     query_category = request.GET.get("cat")
     ordering = request.GET.get("order")
     query = Q(pk__in=[])
     if query_string_q:
-        terms_q = normalize_query(query_string_q.lower())
-        queryset_list = TaggedItem.objects.get_union_by_model(Image, terms_q)
+        image_ = get_object_or_404(Image, id=1)
+        Tag.objects.update_tags(image_, None)
+        Tag.objects.update_tags(image_, query_string_q.lower())
+    if query_string_q:
+        queryset_list = TaggedItem.objects.get_related(image_, Image)
     elif query_string_p:
         terms_p = normalize_query(query_string_p)
         for term in terms_p:
@@ -45,9 +48,9 @@ def image_search(request):
     if query_category:
         queryset_list = queryset_list.filter(Q(category=query_category))
     if ordering is "1":
-        queryset_list = queryset_list.order_by("-timestamp")
+        queryset_list = sorted(queryset_list, key=lambda x: x.timestamp, reverse=True)
     elif ordering is "2":
-        queryset_list = queryset_list.order_by("title")  # 2 - order by popularity
+        queryset_list = sorted(queryset_list, key=lambda x: x.get_popularity(), reverse=True)
     paginator = Paginator(queryset_list, 12)
     page = request.GET.get('page')
     queryset_list = paginator.get_page(page)

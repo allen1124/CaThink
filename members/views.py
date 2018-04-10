@@ -14,6 +14,7 @@ def profile_detail(request, id=None):
     profile = get_object_or_404(Profile, id=id)
     user = profile.user
     images_list = Image.objects.filter(Q(user=profile.user))
+    images_list = images_list.exclude(id=1)
     context = {
         "profile": profile,
         "user_": user,

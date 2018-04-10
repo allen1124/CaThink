@@ -56,6 +56,9 @@ class Image(models.Model):
 	def filename(self):
 		return os.path.basename(self.image.name)
 
+	def get_popularity(self):
+		return self.likes.count() + self.download_count
+
 
 
 class Gallery(models.Model):
