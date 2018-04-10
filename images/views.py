@@ -33,7 +33,6 @@ def image_search(request):
         image_ = get_object_or_404(Image, id=1)
         Tag.objects.update_tags(image_, None)
         Tag.objects.update_tags(image_, query_string_q.lower())
-    if query_string_q:
         queryset_list = TaggedItem.objects.get_related(image_, Image)
     elif query_string_p:
         terms_p = normalize_query(query_string_p)
@@ -47,10 +46,10 @@ def image_search(request):
         queryset_list = queryset_list.filter(query)
     if query_category:
         queryset_list = queryset_list.filter(Q(category=query_category))
-    if ordering is "1":
-        queryset_list = sorted(queryset_list, key=lambda x: x.timestamp, reverse=True)
-    elif ordering is "2":
+    if ordering is "2":
         queryset_list = sorted(queryset_list, key=lambda x: x.get_popularity(), reverse=True)
+    else:
+        queryset_list = sorted(queryset_list, key=lambda x: x.timestamp, reverse=True)
     paginator = Paginator(queryset_list, 12)
     page = request.GET.get('page')
     queryset_list = paginator.get_page(page)
