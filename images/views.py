@@ -30,8 +30,8 @@ def image_search(request):
     ordering = request.GET.get("order")
     query = Q(pk__in=[])
     if query_string_q:
-        terms = normalize_query(query_string_q.lower())
-        queryset_list = TaggedItem.objects.get_union_by_model(Image, terms)
+        terms_q = normalize_query(query_string_q.lower())
+        queryset_list = TaggedItem.objects.get_union_by_model(Image, terms_q)
     elif query_string_p:
         terms_p = normalize_query(query_string_p)
         for term in terms_p:
