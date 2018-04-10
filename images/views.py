@@ -10,7 +10,6 @@ from django.core.paginator import Paginator
 from datetime import datetime
 from django.contrib import messages
 from tagging.models import TaggedItem
-from django.views.generic import RedirectView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
@@ -52,8 +51,10 @@ def image_search(request):
     paginator = Paginator(queryset_list, 12)
     page = request.GET.get('page')
     queryset_list = paginator.get_page(page)
+    liked_images = Image.objects.filter(likes=request.user)
     context = {
         "imagesList": queryset_list,
+        "likedImages": liked_images,
     }
     return render(request, "images.html", context)
 
@@ -62,6 +63,7 @@ def image_detail(request, id=None):
     image = get_object_or_404(Image, id=id)
     context = {
         "image": image,
+        "likedUsers": image.likes.all()
     }
     return render(request, "image_detail.html", context)
 

@@ -85,14 +85,21 @@
                         <p class="card-text mb-auto">
                             {{ image.description|linebreaks|truncatechars:50 }}
                         </p>
-                        <div class="mb-1 text-muted small">{{ image.updated }}</div>
+                        <div class="mb-1 text-muted small">{{ image.updated|date:"SHORT_DATETIME_FORMAT" }}</div>
                         <a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a><br>
                         {% for tag in image.tag.split %}
                             <a class="small" href="?q={{ tag }}">#{{ tag }}</a>
                         {% endfor %}
                         <div class="mt-2"><i class="material-icons" style="font-size:15px;">file_download</i>
                             {{ image.download_count }}
-							&nbsp;&nbsp;<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">{{ image.likes.count }} Like</a>
+							&nbsp;&nbsp;<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">
+								{{ image.likes.count }}
+								{% if image in likedImages %}
+									Unlike
+								{% else %}
+									Like
+								{% endif %}
+							</a>
                         </div>
                     </div>
 

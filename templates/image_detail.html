@@ -53,7 +53,14 @@
 							<a class="btn btn-primary" href="/images/?q={{ image.tag }}">Similar images</a>
 						</td>
 						<td style="text-align: right;">
-							<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">{{ image.likes.count }} Like</a>
+							<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">
+								{{ image.likes.count }}
+								{% if request.user in likedUsers %}
+									Unlike
+								{% else %}
+									Like
+								{% endif %}
+							</a>
 						</td>
 					</tr>
 				</tbody>
