@@ -38,7 +38,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Downloads Count:</td>
+						<td>Download & Likes:</td>
 						<td colspan="2"><i class="material-icons">file_download</i>{{ image.download_count }}</td>
 					</tr>
 					<tr>
@@ -52,10 +52,8 @@
 						<td>
 							<a class="btn btn-primary" href="/images/?q={{ image.tag }}">Similar images</a>
 						</td>
-						<td>
-							<p>
-								<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">{{ image.likes.count }} Like</a>
-							</p>
+						<td style="text-align: right;">
+							<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">{{ image.likes.count }} Like</a>
 						</td>
 					</tr>
 				</tbody>
@@ -63,35 +61,3 @@
 		</div>
 	</div>
 {% endblock %}
-<script>
-	{% block jquery %}
-		$(".like-btn").click(function(e){
-		    e.preventDefault()
-			var likeUrl = $(this).attr("data-href")
-			var likesCount = parseInt($(this).attr("data-likes")) | 0
-			var addLike = likesCount + 1
-			var removeLike = likesCount - 1
-			if(likeUrl){
-		        $.ajax({
-					url: likeUrl,
-					method: "get",
-					data: {},
-					success: function(data){
-						console.log(data)
-						if(data.liked) {
-							$(this).attr("data-likes", addLike)
-							$(this).html(addLike + "Unlike") {# Why not working #}
-						}else {
-							$(this).attr("data-likes", removeLike)
-							$(this).html(removeLike + "Like") {# Why not working #}
-						}
-					},
-					error: function(error){
-						console.log("Error")
-						console.log(error)
-					}
-				})
-			}
-		})
-	{% endblock %}
-</script>

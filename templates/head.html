@@ -111,8 +111,35 @@
 <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script>
 	$(document).ready(function(){
-		{% block jquery %}
-		{% endblock %}
+		$(".like-btn").click(function(e){
+		    e.preventDefault()
+			var this_ = $(this)
+			var likeUrl = this_.attr("data-href")
+			var likesCount = parseInt($(this).attr("data-likes")) | 0
+			var addLike = likesCount + 1
+			var removeLike = likesCount - 1
+			if(likeUrl){
+		        $.ajax({
+					url: likeUrl,
+					method: "get",
+					data: {},
+					success: function(data){
+						console.log(data)
+						if(data.liked) {
+							this_.attr("data-likes", addLike)
+							this_.text(addLike + " Unlike") {# Why not working #}
+						}else {
+							this_.attr("data-likes", removeLike)
+							this_.text(removeLike + " Like") {# Why not working #}
+						}
+					},
+					error: function(error){
+						console.log("Error")
+						console.log(error)
+					}
+				})
+			}
+		})
 	})
 </script>
 </body>

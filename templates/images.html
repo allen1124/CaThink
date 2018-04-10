@@ -92,6 +92,7 @@
                         {% endfor %}
                         <div class="mt-2"><i class="material-icons" style="font-size:15px;">file_download</i>
                             {{ image.download_count }}
+							&nbsp;&nbsp;<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">{{ image.likes.count }} Like</a>
                         </div>
                     </div>
 
