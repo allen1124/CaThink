@@ -45,7 +45,10 @@ def image_search(request):
                 query = query | Q(user=user)
         queryset_list = queryset_list.filter(query)
     if query_category:
-        queryset_list = queryset_list.filter(Q(category=query_category))
+        if query_string_q:
+            queryset_list = [x for x in queryset_list if x.category == query_category]
+        else:
+            queryset_list = queryset_list.filter(Q(category=query_category))
     if ordering is "2":
         queryset_list = sorted(queryset_list, key=lambda x: x.get_popularity(), reverse=True)
     else:
