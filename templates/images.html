@@ -69,16 +69,15 @@
 
 
 
-	<div class="row mb-2 text-lg-left ml-3 mr-3">
+        <div class="row mb-2 text-lg-left ml-3 mr-3">
         {% for image in imagesList %}
-        	<div class="col-md-6 portfolio-item p-3" >
+        <div class="col-md-6 portfolio-item p-3" >
                 <div class="row border p-0 m-0">
                     <div class="col-md-4 p-3" style="-ms-word-break: break-all; word-break: break-all; -webkit-hyphens: auto;
 							-moz-hyphens: auto; hyphens: auto;">
                         {% if image.category != None %}
-                            <strong class="d-inline-block mb-2 text-primary">
-								<a href="?cat={{ image.category }}">{{ image.category }}</a>
-							</strong>
+                            <strong class="d-inline-block mb-2 text-primary"><a
+                                    href="?cat={{ image.category }}">{{ image.category }}</a></strong>
                         {% endif %}
                         <h3 class="mb-0">
                             <a class="text-dark" href="/images/detail/{{ image.id }}">{{ image.title }}</a>
@@ -103,10 +102,12 @@
 							</a>
                         </div>
                     </div>
+
                 <div class="col-md-8 m-0 p-0">
                     <a href="/images/detail/{{ image.id }}"><img class="col-md-12 p-0 pull-right img-responsive " width="100%"  src="{{ image.image.url }}" alt="Card image cap"></a>
                 </div>
              </div>
+        </div>
         {% endfor %}
     </div>
 
