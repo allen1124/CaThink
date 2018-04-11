@@ -11,10 +11,17 @@ from django.utils.encoding import force_bytes, force_text
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
 from django.contrib import messages
+from images.models import Image
+from django.db.models import F, Count
 
 
 def index(request):
-    return render(request, "index.html")
+    queryset_list = Image.objects.all().exclude(id=1).annotate(
+        popularity=(F('download_count')+Count('likes'))).order_by('-popularity') [:10]
+    context = {
+        "imagesList": queryset_list,
+    }
+    return render(request, "index.html", context)
 
 
 def invitation(request):

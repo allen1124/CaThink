@@ -26,6 +26,50 @@
 	</header>
 
     <!-- Image Showcases -->
+<div class="container-fluid">
+	<h2 class="mt-4 mb-3" style="text-align: center">Most Popular Images</h2>
+    <div class="row flex-row flex-nowrap" style="overflow: auto;">
+		{% for image in imagesList %}
+        	<div class="col-md-6 portfolio-item p-3" >
+				<div class="row border p-0 m-0">
+					<div class="col-md-4 p-3" style="-ms-word-break: break-all; word-break: break-all; -webkit-hyphens: auto;
+							-moz-hyphens: auto; hyphens: auto;">
+						{% if image.category != None %}
+							<strong class="d-inline-block mb-2 text-primary">
+								<a href="?cat={{ image.category }}">{{ image.category }}</a>
+							</strong>
+						{% endif %}
+						<h3 class="mb-0">
+							<a class="text-dark" href="/images/detail/{{ image.id }}">{{ image.title }}</a>
+						</h3>
+						<p class="card-text mb-auto">
+							{{ image.description|linebreaks|truncatechars:50 }}
+						</p>
+						<div class="mb-1 text-muted small">{{ image.updated|date:"SHORT_DATETIME_FORMAT" }}</div>
+						<a href="/profile/detail/{{ image.user.id }}">{{ image.user.username }}</a><br>
+						{% for tag in image.tag.split %}
+							<a class="small" href="?q={{ tag }}">#{{ tag }}</a>
+						{% endfor %}
+						<div class="mt-2"><i class="material-icons" style="font-size:15px;">file_download</i>
+							{{ image.download_count }}
+							&nbsp;&nbsp;<a class="like-btn" data-href="{{ image.get_api_like_url }}" data-likes="{{ image.likes.count }}" href="">
+								{{ image.likes.count }}
+								{% if image in likedImages %}
+									Unlike
+								{% else %}
+									Like
+								{% endif %}
+							</a>
+						</div>
+					</div>
+					<div class="col-md-8 m-0 p-0">
+						<a href="/images/detail/{{ image.id }}"><img class="col-md-12 p-0 pull-right img-responsive " width="100%"  src="{{ image.image.url }}" alt="Card image cap"></a>
+					</div>
+				</div>
+        	</div>
+        {% endfor %}
+    </div>
+</d>
 {#    <section class="showcase">#}
 {#		<div class="container-fluid p-0">#}
 {#			<div class="row no-gutters">#}
