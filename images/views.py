@@ -51,7 +51,7 @@ def image_search(request):
             queryset_list = queryset_list.filter(Q(category=query_category))
     if ordering is "2":
         queryset_list = sorted(queryset_list, key=lambda x: x.get_popularity(), reverse=True)
-    else:
+    elif ordering is "1":
         queryset_list = sorted(queryset_list, key=lambda x: x.timestamp, reverse=True)
     paginator = Paginator(queryset_list, 12)
     page = request.GET.get('page')
