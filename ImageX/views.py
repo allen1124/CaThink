@@ -18,8 +18,11 @@ from django.db.models import F, Count
 def index(request):
     queryset_list = Image.objects.all().exclude(id=1).annotate(
         popularity=(F('download_count')+Count('likes'))).order_by('-popularity') [:10]
+    if request.user.is_authenticated:
+        liked_images = Image.objects.filter(likes=request.user)
     context = {
         "imagesList": queryset_list,
+        "likedImages": liked_images,
     }
     return render(request, "index.html", context)
 
