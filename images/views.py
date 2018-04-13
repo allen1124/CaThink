@@ -13,12 +13,11 @@ from tagging.models import TaggedItem, Tag
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
+from django.core.files.images import ImageFile
 import re
 
 
-def normalize_query(query_string,
-                    findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
-                    normspace=re.compile(r'\s{2,}').sub):
+def normalize_query(query_string, findterms=re.compile(r'"([^"]+)"|(\S+)').findall, normspace=re.compile(r'\s{2,}').sub):
     return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
 
 
@@ -28,6 +27,10 @@ def image_search(request):
     query_string_p = request.GET.get("p")
     query_category = request.GET.get("cat")
     ordering = request.GET.get("order")
+    if not Image.objects.filter(pk=1).exists():
+        image_ = Image.objects.create(user=get_object_or_404(User, id=1))
+        image_.image = ImageFile(open("static/img/bg-masthead.jpg", "rb"))
+        image_.save()
     query = Q(pk__in=[])
     if query_string_q:
         image_ = get_object_or_404(Image, id=1)
@@ -95,11 +98,12 @@ def image_upload(request):
     if user_profile.daily_upload_count < 4 and user_profile.remaining_quota >= 1:
         if form.is_valid():
             image = form.save(commit=False)
-            if len(normalize_query(form.cleaned_data['tag'])) > 10:
-                messages.warning(request, "Sorry, you have added too many tags in a image")
-                context = {
-                    "form": form
-                }
+            if form.cleaned_data['tag'] is not None:
+                if len(normalize_query(form.cleaned_data['tag'])) > 10:
+                    messages.warning(request, "Sorry, you have added too many tags in a image")
+                    context = {
+                        "form": form
+                    }
                 return render(request, "image_form.html", context)
             if not (str(form.cleaned_data['image'].content_type).endswith("jpeg") or str(
                     form.cleaned_data['image'].content_type).endswith("jpg")):
