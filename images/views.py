@@ -104,7 +104,7 @@ def image_upload(request):
                     context = {
                         "form": form
                     }
-                return render(request, "image_form.html", context)
+                    return render(request, "image_form.html", context)
             if not (str(form.cleaned_data['image'].content_type).endswith("jpeg") or str(
                     form.cleaned_data['image'].content_type).endswith("jpg")):
                 messages.warning(request, "Sorry, imageX supports only the JPEG file format.")
