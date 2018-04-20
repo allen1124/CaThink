@@ -142,9 +142,9 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST = 'smtp.gmail.com'
 
-EMAIL_HOST_USER = 'imagex.cathink@gmail.com'
+EMAIL_HOST_USER = 'cathinkimagex@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'cathink123'
+EMAIL_HOST_PASSWORD = 'cathink123imagex'
 
 EMAIL_PORT = 587
 
