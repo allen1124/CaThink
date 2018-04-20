@@ -30,6 +30,7 @@ CategoryList = (('Abstract', 'Abstract'),
 class Image(models.Model):
 	user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
 	title = models.CharField(max_length=120, blank=True)
+	# tag = models.CharField(max_length=120, blank=True, null=True)
 	tag = TagField(blank=True)
 	category = models.CharField(max_length=120, choices=CategoryList, null=True, blank=True)
 	image = models.ImageField(null=True, blank=False, height_field="heightField", width_field="WidthField")
@@ -65,6 +66,7 @@ class Gallery(models.Model):
 	user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
 	title = models.CharField(max_length=120, blank=True)
 	category = models.CharField(max_length=120, choices=CategoryList, null=True, blank=True)
+	# tag = models.CharField(max_length=120, blank=True, null=True)
 	tag = TagField(blank=True)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

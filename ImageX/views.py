@@ -16,6 +16,7 @@ from django.db.models import F, Count
 
 
 def index(request):
+    liked_images = None
     queryset_list = Image.objects.all().exclude(id=1).annotate(
         popularity=(F('download_count')+Count('likes'))).order_by('-popularity') [:10]
     if request.user.is_authenticated:
