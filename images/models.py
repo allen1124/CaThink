@@ -60,6 +60,8 @@ class Image(models.Model):
 	def get_popularity(self):
 		return self.likes.count() + self.download_count
 
+	class Meta:
+		ordering = ["-timestamp"]
 
 
 class Gallery(models.Model):
