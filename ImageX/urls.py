@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from ImageX.views import index, register, invitation
+from ImageX.views import index
 from images import views as images_view
 from members import views as members_view
 from images.views import ImageLikesAPIToggle
@@ -45,9 +45,9 @@ urlpatterns = [
 	url(r'^profile/edit$', members_view.profile_edit),
 	url(r'^profile/change-password$', members_view.change_password),
 	url(r'^profile/detail/(?P<id>\d+)/$', members_view.profile_detail, name="profile_detail"),
-	url(r'^profile/invitation/$', invitation, name="invitation"),
+	url(r'^profile/invitation/$', members_view.invitation, name="invitation"),
 	url(r'^register/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/(?P<email>.*?)/$',
-		register, name='register'),
+		members_view.register, name='register'),
 ]
 
 if settings.DEBUG:
