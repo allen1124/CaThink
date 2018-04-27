@@ -135,12 +135,13 @@ def image_edit(request, id=None):
         form = ImageEditForm(request.POST or None, instance=image)
         if form.is_valid():
             image = form.save(commit=False)
-            if len(normalize_query(form.cleaned_data['tag'])) > 10:
-                messages.warning(request, "Sorry, you have added too many tags in a image")
-                context = {
-                    "form": form
-                }
-                return render(request, "image_edit.html", context)
+            if form.cleaned_data['tag'] is not None:
+                if len(normalize_query(form.cleaned_data['tag'])) > 10:
+                    messages.warning(request, "Sorry, you have added too many tags in a image")
+                    context = {
+                        "form": form
+                    }
+                    return render(request, "image_edit.html", context)
             image.save()
             messages.success(request, "Image has been updated.")
             return HttpResponseRedirect(image.get_absolute_url())
