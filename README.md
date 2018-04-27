@@ -6,9 +6,9 @@ Deployment Requirement
 
 0. Please make sure you have installed the following library packages in your project interpreter, Python 3.6
    [Django 2.0.X, Pillow, django-widget-tweaks, django-tagging, djangorestframework]
-1. In images/model.py, you should comment out line 34, 70 which have TagField and uncomment line 33, 69 to use CharField for tag.*
+1. In images/model.py, you should comment out line 34, 72 which have TagField and uncomment line 33, 71 to use CharField for tag.*
 2. Run 'makemigrations' then 'migrate' in manage.py
-3. Reverse the changes of step 1, comment out line 33, 69 and uncomment line 34, 70 to use TagField for tag in images/model.py.*
+3. Reverse the changes of step 1, comment out line 33, 71 and uncomment line 34, 72 to use TagField for tag in images/model.py.*
 4. Repeat step 2, run 'makemigrations' then 'migrate' in manage.py
 5. Run the command 'createsuperuser' in manage.py as administrator account of imageX.
 6. Ready for use now.
